@@ -1,0 +1,14 @@
+{
+  "secret": "somethingElseInProd",
+  "noCache": true,
+  "logging": true,
+  "mongo": {
+    "url": "mongodb://127.0.0.1:27017/lishogi",
+    "db": "lishogi",
+    "coll": "game5"
+  },
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379
+  }
+}
