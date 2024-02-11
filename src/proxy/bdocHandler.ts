@@ -55,7 +55,8 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
     ? speedByTotalTime(clockConfig.limit, clockConfig.inc, clockConfig.per, clockConfig.byo)
     : Speed.Correspondence;
 
-  const status = doc.s === Status.Timeout ? Status.Outoftime : doc.s;
+  const status =
+    doc.s === Status.Timeout ? Status.Outoftime : doc.s === Status.Cheat ? Status.UnknownFinish : doc.s;
 
   const analysis: (number | undefined)[] | undefined = doc.analysisData
     ? decodeAnalysis(doc.analysisData, color === 'gote').map(e => evalToWin(e))
