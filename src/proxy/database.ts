@@ -33,6 +33,7 @@ export class Database {
       // _id: {$in: [],},
       if: { $exists: false },
       us: by,
+      s: { $gte: 30 },
       ua: { $gte: getDateNDaysAgo(365) },
     };
 
