@@ -111,7 +111,7 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
           ? winsToAccuracy(prevWinP, newWinP)
           : undefined;
       if (accuracy !== undefined) {
-        accuracy = Math.min(accuracy, 100);
+        accuracy = Math.max(0, Math.min(accuracy, 100));
         accuracies.push(accuracy);
         sumOfAccuracy += accuracy;
       }

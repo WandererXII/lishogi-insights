@@ -63,8 +63,10 @@ function mateToWin(mate: number): number {
 }
 
 export function winsToAccuracy(beforeCp: number, afterCp: number): number | undefined {
+  const offset = 0.1, // larger tilts curve down
+    coefficient = 0.075; // larger means steeper curve
   if (afterCp === 31111) return undefined; // 31111 was used by yane for repeating positions
-  return 103.1668 * Math.exp(-0.04354 * (beforeCp - afterCp)) - 3.1669;
+  return (100 + offset) * Math.exp(-coefficient * (beforeCp - afterCp)) - (offset + 0.0001);
 }
 
 export function getKeysWithLargestValues(obj: CounterObj<string>, n: number): string[] {
