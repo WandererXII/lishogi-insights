@@ -7,7 +7,7 @@ import { evalToWin, numberOfFiles, roleToIndex, speedByTotalTime, variant, winsT
 import { calculate } from '../lishogi/movetimes/calculate';
 import { defaultPosition } from 'shogiops/variant/variant';
 import { promote } from 'shogiops/variant/util';
-import { opposite, parseUsi } from 'shogiops/util';
+import { defined, opposite, parseUsi } from 'shogiops/util';
 import {
   Accuracy,
   Centis,
@@ -122,7 +122,8 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
       if (!old) continue;
 
       if (usi.promotion) old.role = promotion(old.role) || old.role;
-      const captured = board.set(usi.to, old);
+      const captured = board.set(usi.to, old),
+        secondCapture = defined(usi.midStep) ? board.take(usi.midStep) : undefined;
 
       if (v === Variant.Standard && captured?.role === 'bishop' && i < 15 && !earlyTradedBishop) {
         if (capturedBishopColor !== captured.color) earlyTradedBishop = true;
@@ -135,8 +136,14 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
         nbOfMovesByRole[roleIndex] = (nbOfMovesByRole[roleIndex] || 0) + 1;
         if (usi.promotion) nbOfPromotions++;
         if (captured) {
+          const capturedIndex = roleToIndex(captured.role);
           nbOfCaptures++;
-          nbOfCapturesByRole[roleIndex] = (nbOfCapturesByRole[roleIndex] || 0) + 1;
+          nbOfCapturesByRole[capturedIndex] = (nbOfCapturesByRole[capturedIndex] || 0) + 1;
+        }
+        if (secondCapture) {
+          const capturedIndex = roleToIndex(secondCapture.role);
+          nbOfCaptures++;
+          nbOfCapturesByRole[capturedIndex] = (nbOfCapturesByRole[capturedIndex] || 0) + 1;
         }
         sumOfTimePerMoveRole[roleIndex] = (sumOfTimePerMoveRole[roleIndex] || 0) + time;
 
