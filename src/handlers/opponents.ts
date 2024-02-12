@@ -26,9 +26,10 @@ export function opponents(games: Game[], flt: Filter): OpponentResult {
     }
   }
   const keysWithHighestValue = getKeysWithLargestValues(opponentCounter, 10);
-  const filteredOpponents = Object.fromEntries(
-    Object.entries(opponents).filter(([key]) => keysWithHighestValue.includes(key)),
-  );
+  const filteredOpponents = keysWithHighestValue.reduce((acc: Record<string, WinRate>, cur) => {
+    acc[cur] = opponents[cur];
+    return acc;
+  }, {});
 
   return {
     nbOfGames: nbOfGames,
