@@ -12,6 +12,7 @@ export class Database {
     readonly mongoURL: string,
     readonly dbName: string,
     readonly collectionName: string,
+    readonly analysisCollectionName: string,
   ) {}
 
   connect = async (): Promise<void> => {
@@ -44,7 +45,7 @@ export class Database {
         },
         {
           $lookup: {
-            from: 'analysis3',
+            from: this.analysisCollectionName,
             localField: '_id',
             foreignField: '_id',
             as: 'analysisData',

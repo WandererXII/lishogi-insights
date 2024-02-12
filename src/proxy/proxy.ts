@@ -18,7 +18,7 @@ export class Proxy {
   private resultLock;
 
   constructor() {
-    this.db = new Database(conf.mongo.url, conf.mongo.db, conf.mongo.coll);
+    this.db = new Database(conf.mongo.url, conf.mongo.db, conf.mongo.coll, conf.mongo.analysisColl);
     this.cache = new Cache(conf.redis.host, conf.redis.port);
     this.gameLock = lock<Game[]>();
     this.resultLock = lock<Result>();

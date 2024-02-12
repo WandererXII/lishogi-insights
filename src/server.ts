@@ -6,7 +6,7 @@ import { Proxy } from './proxy/proxy';
 import { Type } from './types';
 import { filterFromQuery } from './util';
 
-const PORT = 3000;
+const PORT = conf.port;
 const app = express();
 app.use(express.json());
 app.use(cors());
