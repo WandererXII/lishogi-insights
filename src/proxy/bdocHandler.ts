@@ -6,6 +6,7 @@ import { decode as decodeClockConfig } from '../lishogi/clockConfig/binary';
 import { evalToWin, numberOfFiles, roleToIndex, speedByTotalTime, variant, winsToAccuracy } from '../util';
 import { calculate } from '../lishogi/movetimes/calculate';
 import { defaultPosition } from 'shogiops/variant/variant';
+import { promote } from 'shogiops/variant/util';
 import { opposite, parseUsi } from 'shogiops/util';
 import {
   Accuracy,
@@ -82,7 +83,9 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
     sumOfAccuracciesByDropRole: PartialRecord<RoleIndex, Accuracy> = {};
 
   let turn: Color = 'gote';
-  const board = defaultPosition(variant(doc.v)).board;
+  const rules = variant(doc.v),
+    board = defaultPosition(rules).board,
+    promotion = promote(rules);
 
   for (let i = 0; i < usis.length; i++) {
     turn = opposite(turn);
@@ -118,6 +121,7 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
       const old = board.take(usi.from);
       if (!old) continue;
 
+      if (usi.promotion) old.role = promotion(old.role) || old.role;
       const captured = board.set(usi.to, old);
 
       if (v === Variant.Standard && captured?.role === 'bishop' && i < 15 && !earlyTradedBishop) {
