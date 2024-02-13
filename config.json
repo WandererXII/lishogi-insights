@@ -1,8 +1,8 @@
 {
   "port": 3000,
   "secret": "somethingElseInProd",
-  "noCache": true,
-  "logging": true,
+  "noCache": false,
+  "logging": false,
   "mongo": {
     "url": "mongodb://127.0.0.1:27017/lishogi",
     "db": "lishogi",
