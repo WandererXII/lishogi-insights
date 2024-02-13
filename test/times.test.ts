@@ -15,12 +15,19 @@ test('times', () => {
     avgTimePerMove: 1.3627272727272728,
     avgTimePerDrop: 0,
     avgTimePerGame: 4.996666666666667,
-    avgTimeByMoveRole: {
-      gold: 0.56,
-      pawn: 3.716666666666667,
-      rook: 1.2,
-      bishop: 1.52,
+    nbOfDropsByRole: {},
+    nbOfMovesByRole: {
+      bishop: 1,
+      gold: 3,
+      pawn: 5,
+      rook: 2,
     },
-    avgTimeByDropRole: {},
+    sumOfTimesByDropRole: {},
+    sumOfTimesByMoveRole: {
+      bishop: 1.52,
+      gold: 1.12,
+      pawn: 11.15,
+      rook: 1.2,
+    },
   });
 });

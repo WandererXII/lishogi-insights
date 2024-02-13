@@ -35,11 +35,11 @@ export const game1: Game = {
   opponentRatingDiff: undefined,
   totalTimeOfMoves: 668,
   totalTimeOfDrops: 0,
-  sumOfTimeByMoveRole: {
+  sumOfTimesByMoveRole: {
     '3': 0,
     '7': 668,
   },
-  sumOfTimeByDropRole: {},
+  sumOfTimesByDropRole: {},
   accuracy: undefined,
   accuracies: [],
   sumOfAccuracyByMoveRole: {},
@@ -83,12 +83,12 @@ export const game2: Game = {
   opponentRatingDiff: -100,
   totalTimeOfMoves: 496,
   totalTimeOfDrops: 0,
-  sumOfTimeByMoveRole: {
+  sumOfTimesByMoveRole: {
     '3': 112,
     '6': 120,
     '7': 264,
   },
-  sumOfTimeByDropRole: {},
+  sumOfTimesByDropRole: {},
   accuracy: 68.99707352502747,
   accuracies: [
     85.02856987174783, 98.83011409325246, 77.43725456868071, 22.952174254200003, 79.06482970414292,
@@ -140,11 +140,11 @@ export const game3: Game = {
   opponentRatingDiff: 100,
   totalTimeOfMoves: 335,
   totalTimeOfDrops: 0,
-  sumOfTimeByMoveRole: {
+  sumOfTimesByMoveRole: {
     '5': 152,
     '7': 183,
   },
-  sumOfTimeByDropRole: {},
+  sumOfTimesByDropRole: {},
   accuracy: 96.29136995838144,
   accuracies: [99.29490528258943, 97.28501749886522, 92.29418709368967],
   sumOfAccuracyByMoveRole: {

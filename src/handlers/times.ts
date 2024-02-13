@@ -11,11 +11,11 @@ export function times(games: Game[], flt: Filter): TimesResult {
     sumOfMoves = 0,
     sumOfDrops = 0;
 
-  const sumOfTimeByMoveRole: PartialRecord<Role, Centis> = {},
-    timeByMoveRoleCount: CounterObj<Role> = {};
+  const sumOfTimesByMoveRole: PartialRecord<Role, Centis> = {},
+    nbOfMovesByRole: CounterObj<Role> = {};
 
-  const sumOfTimeByDropRole: PartialRecord<Role, Centis> = {},
-    timeByDropRoleCount: CounterObj<Role> = {};
+  const sumOfTimesByDropRole: PartialRecord<Role, Centis> = {},
+    nbOfDropsByRole: CounterObj<Role> = {};
 
   for (const game of games) {
     if (game.date < flt.since) break;
@@ -27,30 +27,19 @@ export function times(games: Game[], flt: Filter): TimesResult {
       sumOfTimesPerDrop += game.totalTimeOfDrops / 100;
       sumOfMoves += game.nbOfMoves;
       sumOfDrops += game.nbOfDrops;
-      for (const role in game.sumOfTimeByMoveRole) {
-        sumOfTimeByMoveRole[ROLES[role]] =
-          (sumOfTimeByMoveRole[ROLES[role]] || 0) + game.sumOfTimeByMoveRole[role]! / 100;
-        timeByMoveRoleCount[ROLES[role]] = (timeByMoveRoleCount[ROLES[role]] || 0) + 1;
+      for (const role in game.sumOfTimesByMoveRole) {
+        sumOfTimesByMoveRole[ROLES[role]] =
+          (sumOfTimesByMoveRole[ROLES[role]] || 0) + game.sumOfTimesByMoveRole[role]! / 100;
+        nbOfMovesByRole[ROLES[role]] =
+          (nbOfMovesByRole[ROLES[role]] || 0) + (game.nbOfMovesByRole[role] || 0);
       }
-      for (const role in game.sumOfTimeByDropRole) {
-        sumOfTimeByDropRole[ROLES[role]] =
-          (sumOfTimeByDropRole[ROLES[role]] || 0) + game.sumOfTimeByDropRole[role]! / 100;
-        timeByDropRoleCount[ROLES[role]] = (timeByDropRoleCount[ROLES[role]] || 0) + 1;
+      for (const role in game.sumOfTimesByDropRole) {
+        sumOfTimesByDropRole[ROLES[role]] =
+          (sumOfTimesByDropRole[ROLES[role]] || 0) + game.sumOfTimesByDropRole[role]! / 100;
+        nbOfDropsByRole[ROLES[role]] =
+          (nbOfDropsByRole[ROLES[role]] || 0) + (game.nbOfDropsByRole[role] || 0);
       }
     }
-  }
-  const avgTimeByMoveRole: PartialRecord<Role, Centis> = {};
-  for (const role in sumOfTimeByMoveRole) {
-    const r = role as Role,
-      count = timeByMoveRoleCount[r];
-    if (count) avgTimeByMoveRole[r] = sumOfTimeByMoveRole[r]! / count;
-  }
-
-  const avgTimeByDropRole: PartialRecord<Role, Centis> = {};
-  for (const role in sumOfTimeByDropRole) {
-    const r = role as Role,
-      count = timeByDropRoleCount[r];
-    if (count) avgTimeByDropRole[r] = sumOfTimeByDropRole[r]! / count;
   }
 
   const sumOfMovesAndDrops = sumOfMoves + sumOfDrops;
@@ -62,7 +51,9 @@ export function times(games: Game[], flt: Filter): TimesResult {
     avgTimePerMove: sumOfMoves ? sumOfTimesPerMove / sumOfMoves : 0,
     avgTimePerDrop: sumOfDrops ? sumOfTimesPerDrop / sumOfDrops : 0,
     avgTimePerGame: nbOfGames ? totalTime / nbOfGames : 0,
-    avgTimeByMoveRole: avgTimeByMoveRole,
-    avgTimeByDropRole: avgTimeByDropRole,
+    sumOfTimesByMoveRole: sumOfTimesByMoveRole,
+    sumOfTimesByDropRole: sumOfTimesByDropRole,
+    nbOfMovesByRole: nbOfMovesByRole,
+    nbOfDropsByRole: nbOfDropsByRole,
   };
 }

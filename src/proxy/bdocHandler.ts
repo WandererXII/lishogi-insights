@@ -75,8 +75,8 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
     earlyTradedBishop: boolean = false,
     totalTimeOfMoves: Centis = 0,
     totalTimeOfDrops: Centis = 0,
-    sumOfTimePerMoveRole: PartialRecord<RoleIndex, Centis> = {},
-    sumOfTimePerDropRole: PartialRecord<RoleIndex, Centis> = {},
+    sumOfTimesByMoveRole: PartialRecord<RoleIndex, Centis> = {},
+    sumOfTimesByDropRole: PartialRecord<RoleIndex, Centis> = {},
     accuracies: Accuracy[] = [],
     sumOfAccuracy: Accuracy = 0,
     sumOfAccuracciesByMoveRole: PartialRecord<RoleIndex, Accuracy> = {},
@@ -145,7 +145,7 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
           nbOfCaptures++;
           nbOfCapturesByRole[capturedIndex] = (nbOfCapturesByRole[capturedIndex] || 0) + 1;
         }
-        sumOfTimePerMoveRole[roleIndex] = (sumOfTimePerMoveRole[roleIndex] || 0) + time;
+        sumOfTimesByMoveRole[roleIndex] = (sumOfTimesByMoveRole[roleIndex] || 0) + time;
 
         if (accuracy !== undefined) {
           sumOfAccuracciesByMoveRole[roleIndex] = (sumOfAccuracciesByMoveRole[roleIndex] || 0) + accuracy;
@@ -163,7 +163,7 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
         nbOfDrops++;
         nbOfDropsByRole[roleIndex] = (nbOfDropsByRole[roleIndex] || 0) + 1;
 
-        sumOfTimePerDropRole[roleIndex] = (sumOfTimePerDropRole[roleIndex] || 0) + time;
+        sumOfTimesByDropRole[roleIndex] = (sumOfTimesByDropRole[roleIndex] || 0) + time;
 
         if (accuracy !== undefined) {
           sumOfAccuracciesByDropRole[roleIndex] = (sumOfAccuracciesByDropRole[roleIndex] || 0) + accuracy;
@@ -205,8 +205,8 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
     // times
     totalTimeOfMoves: totalTimeOfMoves,
     totalTimeOfDrops: totalTimeOfDrops,
-    sumOfTimeByMoveRole: sumOfTimePerMoveRole,
-    sumOfTimeByDropRole: sumOfTimePerDropRole,
+    sumOfTimesByMoveRole: sumOfTimesByMoveRole,
+    sumOfTimesByDropRole: sumOfTimesByDropRole,
     // analysis
     accuracy: accuracies.length ? sumOfAccuracy / accuracies.length : undefined,
     accuracies: accuracies,

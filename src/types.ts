@@ -41,8 +41,10 @@ export interface TimesResult extends Result {
   avgTimePerMove: number;
   avgTimePerDrop: number;
   avgTimePerGame: number;
-  avgTimeByMoveRole: PartialRecord<Role, Centis>;
-  avgTimeByDropRole: PartialRecord<Role, Centis>;
+  sumOfTimesByMoveRole: PartialRecord<Role, Centis>;
+  sumOfTimesByDropRole: PartialRecord<Role, Centis>;
+  nbOfMovesByRole: CounterObj<Role>;
+  nbOfDropsByRole: CounterObj<Role>;
 }
 export interface AnalysisResult extends Result {
   accuracy: Accuracy;
@@ -104,8 +106,8 @@ export interface Game {
   // times
   totalTimeOfMoves: Centis;
   totalTimeOfDrops: Centis;
-  sumOfTimeByMoveRole: PartialRecord<RoleIndex, Centis>;
-  sumOfTimeByDropRole: PartialRecord<RoleIndex, Centis>;
+  sumOfTimesByMoveRole: PartialRecord<RoleIndex, Centis>;
+  sumOfTimesByDropRole: PartialRecord<RoleIndex, Centis>;
   // analysis
   accuracy: Accuracy | undefined;
   accuracies: Accuracy[];
