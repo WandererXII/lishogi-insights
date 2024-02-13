@@ -201,7 +201,7 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
     // opponent
     opponent: opponentUsername,
     opponentRating: opponent?.e,
-    opponentRatingDiff: me?.e && opponent?.e ? me.e - opponent.e : undefined,
+    opponentRatingDiff: me?.e && opponent?.e ? opponent.e - me.e : undefined,
     // times
     totalTimeOfMoves: totalTimeOfMoves,
     totalTimeOfDrops: totalTimeOfDrops,
