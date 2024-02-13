@@ -66,7 +66,7 @@ export interface Filter {
   color: Color | 'both';
   rated: 'yes' | 'no' | 'both';
   speeds: Speed[];
-  includeComputer: 'yes' | 'no';
+  computer: 'yes' | 'no' | 'both';
   custom: Custom;
 }
 export interface Custom {

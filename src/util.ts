@@ -87,7 +87,7 @@ export function filterFromQuery(query: Record<string, any>): Filter {
             .filter((n: number) => !isNaN(n))
         : [],
     rated = ['yes', 'no', 'both'].includes(query.rated) ? query.rated : 'both',
-    includeComputer = query.includeComputer === 'yes' ? 'yes' : 'no',
+    computer = ['yes', 'no', 'both'].includes(query.computer) ? query.computer : 'no',
     custom = {
       type: query.customType || 'game',
       x: query.xKey,
@@ -101,14 +101,12 @@ export function filterFromQuery(query: Record<string, any>): Filter {
     color: color,
     speeds: speeds,
     rated: rated,
-    includeComputer: includeComputer,
+    computer: computer,
     custom: custom,
   };
 }
 
 export function filterToKey(flt: Filter): string {
   const xy = flt.custom ? `${flt.custom.x}-${flt.custom.y}` : '';
-  return `${flt.variant}-${flt.color[0]}-${flt.speeds.join('-')}-${flt.rated[0]}-${
-    flt.includeComputer ? 'y' : 'n'
-  };${xy}`;
+  return `${flt.variant}-${flt.color[0]}-${flt.speeds.join(',')}-${flt.rated[0]}-${flt.computer[0]};${xy}`;
 }
