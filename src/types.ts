@@ -167,7 +167,7 @@ export enum Status {
   cheat = 36,
   noStart = 37,
   unknownFinish = 38,
-  tryRule = 39,
+  // tryRule = 39,
   perpetualCheck = 40,
   impasse27 = 41,
   royalsLost = 42,

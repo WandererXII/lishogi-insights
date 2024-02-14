@@ -82,7 +82,7 @@ function labels(domain: Domain): string[] {
     case 'outcomes':
       return Object.keys(Outcome).filter(key => isNaN(parseInt(key)));
     case 'status':
-      return Object.keys(Status).filter(key => isNaN(parseInt(key)));
+      return Object.keys(Status).filter(key => isNaN(parseInt(key)) && key !== 'cheat');
     case 'speed':
       return Object.keys(Speed).filter(key => isNaN(parseInt(key)));
     case 'weekday':
