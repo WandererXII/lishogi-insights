@@ -61,7 +61,7 @@ export interface AnalysisResult extends Result {
 }
 
 export interface Filter {
-  since: Date;
+  since: Millis;
   variant: Variant;
   color: Color | 'both';
   rated: 'yes' | 'no' | 'both';
@@ -84,7 +84,7 @@ export interface Game {
   status: Status;
   speed: Speed;
   rated: boolean;
-  date: Date;
+  date: Millis;
   computer: boolean;
   usis: Usi[];
   clockConfig?: ClockConfig;
@@ -128,6 +128,7 @@ export type Accuracy = number;
 export type Eval = [number, undefined] | [undefined, number] | undefined;
 
 export type Centis = number;
+export type Millis = number;
 
 export interface ClockConfig {
   limit: Centis;

@@ -8,7 +8,7 @@ export const game1: Game = {
   status: 31,
   speed: 5,
   rated: false,
-  date: new Date('2023-06-21T17:40:46.566Z'),
+  date: new Date('2023-06-21T17:40:46.566Z').getTime(),
   computer: false,
   usis: ['4i5h', '8c8d', '7g7f'],
   clockConfig: {
@@ -53,7 +53,7 @@ export const game2: Game = {
   status: 30,
   speed: 1,
   rated: false,
-  date: new Date('2023-03-21T18:54:04.043Z'),
+  date: new Date('2023-03-21T18:54:04.043Z').getTime(),
   computer: false,
   usis: ['2h5h', '5c5d', '5g5f', '8b5b', '5f5e', '5d5e', '5h5e', '5b5e', '4i5h', 'R*5b', '6i7h', '5e5h+'],
   clockConfig: {
@@ -109,7 +109,7 @@ export const game3: Game = {
   status: 31,
   speed: 1,
   rated: false,
-  date: new Date('2023-03-22T02:03:24.801Z'),
+  date: new Date('2023-03-22T02:03:24.801Z').getTime(),
   computer: false,
   usis: ['7g7f', '3c3d', '8h2b+', '3a2b', '5g5f'],
   clockConfig: {

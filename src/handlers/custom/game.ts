@@ -126,10 +126,11 @@ function domainFromKey(key: Domain, tmz: string = 'UTC'): (game: Game) => string
     case 'earlyBishopExchange':
       return game => (game[key] ? 'yes' : 'no');
     case 'weekday':
-      return game => game.date.toLocaleDateString('en-US', { weekday: 'long', timeZone: tmz }).toLowerCase();
+      return game =>
+        new Date(game.date).toLocaleDateString('en-US', { weekday: 'long', timeZone: tmz }).toLowerCase();
     case 'timeOfDay':
       return game => {
-        const tmzDate = new Date(game.date.toLocaleString('en-US', { timeZone: tmz }));
+        const tmzDate = new Date(new Date(game.date).toLocaleString('en-US', { timeZone: tmz }));
         const hour = tmzDate.getHours();
         if (hour < 6) return 'night';
         else if (hour < 12) return 'morning';

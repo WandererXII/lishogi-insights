@@ -96,7 +96,7 @@ export function filterFromQuery(query: Record<string, any>): Filter {
     };
 
   return {
-    since: getDateNDaysAgo(since),
+    since: getDateNDaysAgo(since).getTime(),
     variant: variant,
     color: color,
     speeds: speeds,

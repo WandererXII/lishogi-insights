@@ -182,7 +182,7 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
     status: status,
     speed: speed,
     rated: !!doc.ra,
-    date: doc.ua,
+    date: doc.ua.getTime(),
     computer: !!opponent?.ai,
     usis: usis,
     clockConfig: clockConfig,
