@@ -31,6 +31,7 @@ export class Cache {
   };
 
   get = async <T extends object>(key: string): Promise<T | undefined> => {
+    if (conf.noCache) return undefined;
     const cached = await this.client.get(key);
     return cached ? JSON.parse(cached) : undefined;
   };
