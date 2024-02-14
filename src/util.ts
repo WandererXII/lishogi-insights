@@ -35,12 +35,12 @@ export function speedByTotalTime(
   byoyomi: Centis,
 ): Speed {
   const totalTime = limit / 100 + 60 * (increment / 100) + 25 * periodsTotal * (byoyomi / 100);
-  if (totalTime < 59) return Speed.UltraBullet;
-  else if (totalTime < 299) return Speed.Bullet;
-  else if (totalTime < 599) return Speed.Blitz;
-  else if (totalTime < 1499) return Speed.Rapid;
-  else if (totalTime < 21599) return Speed.Classical;
-  else return Speed.Correspondence;
+  if (totalTime < 59) return Speed.ultraBullet;
+  else if (totalTime < 299) return Speed.bullet;
+  else if (totalTime < 599) return Speed.blitz;
+  else if (totalTime < 1499) return Speed.rapid;
+  else if (totalTime < 21599) return Speed.classical;
+  else return Speed.correspondence;
 }
 
 export function numberOfFiles(v: number | undefined): number {
@@ -77,7 +77,7 @@ export function getKeysWithLargestValues(obj: CounterObj<string>, n: number): st
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 export function filterFromQuery(query: Record<string, any>): Filter {
   const since = parseInt(query.since) || 365,
-    variant = parseInt(query.variant) || Variant.Standard,
+    variant = parseInt(query.variant) || Variant.standard,
     color = COLORS.includes(query.color) ? query.color : 'both',
     speeds: Speed[] =
       typeof query.speeds === 'string'

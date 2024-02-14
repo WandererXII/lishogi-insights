@@ -80,17 +80,11 @@ function labels(domain: Domain): string[] {
     case 'color':
       return ['sente', 'gote'];
     case 'outcomes':
-      return Object.keys(Outcome)
-        .filter(key => isNaN(parseInt(key)))
-        .map(key => key.toLowerCase());
+      return Object.keys(Outcome).filter(key => isNaN(parseInt(key)));
     case 'status':
-      return Object.keys(Status)
-        .filter(key => isNaN(parseInt(key)))
-        .map(key => key.toLowerCase());
+      return Object.keys(Status).filter(key => isNaN(parseInt(key)));
     case 'speed':
-      return Object.keys(Speed)
-        .filter(key => isNaN(parseInt(key)))
-        .map(key => key.toLowerCase());
+      return Object.keys(Speed).filter(key => isNaN(parseInt(key)));
     case 'weekday':
       return ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     case 'timeOfDay':
@@ -110,17 +104,17 @@ function domainFromKey(key: Domain, tmz: string = 'UTC'): (game: Game) => string
     case 'outcomes':
       return game => {
         const value = game['outcome'];
-        if (value !== undefined) return Outcome[value].toLowerCase();
+        if (value !== undefined) return Outcome[value];
       };
     case 'status':
       return game => {
         const value = game[key];
-        if (value !== undefined) return Status[value].toLowerCase();
+        if (value !== undefined) return Status[value];
       };
     case 'speed':
       return game => {
         const value = game[key];
-        if (value !== undefined) return Speed[value].toLowerCase();
+        if (value !== undefined) return Speed[value];
       };
     case 'rated':
     case 'earlyBishopExchange':
@@ -191,13 +185,13 @@ function mappingFromKey(
       return (game, res, x) => {
         const value = game['outcome'];
         if (value === undefined) return;
-        if (value === Outcome.Win) {
+        if (value === Outcome.win) {
           res.win = res.win || {};
           res.win[x] = (res.win[x] || 0) + 1;
-        } else if (value === Outcome.Draw) {
+        } else if (value === Outcome.draw) {
           res.draw = res.draw || {};
           res.draw[x] = (res.draw[x] || 0) + 1;
-        } else if (value === Outcome.Loss) {
+        } else if (value === Outcome.loss) {
           res.loss = res.loss || {};
           res.loss[x] = (res.loss[x] || 0) + 1;
         }

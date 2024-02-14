@@ -50,14 +50,14 @@ export function analysis(games: Game[], flt: Filter): AnalysisResult {
   }
 
   const accuracyByOutcome: [Accuracy, Accuracy, Accuracy] = [
-    winRateAccuraciesCount[Outcome.Win]
-      ? winRateAccuracies[Outcome.Win] / winRateAccuraciesCount[Outcome.Win]
+    winRateAccuraciesCount[Outcome.win]
+      ? winRateAccuracies[Outcome.win] / winRateAccuraciesCount[Outcome.win]
       : 0,
-    winRateAccuraciesCount[Outcome.Draw]
-      ? winRateAccuracies[Outcome.Draw] / winRateAccuraciesCount[Outcome.Draw]
+    winRateAccuraciesCount[Outcome.draw]
+      ? winRateAccuracies[Outcome.draw] / winRateAccuraciesCount[Outcome.draw]
       : 0,
-    winRateAccuraciesCount[Outcome.Loss]
-      ? winRateAccuracies[Outcome.Loss] / winRateAccuraciesCount[Outcome.Loss]
+    winRateAccuraciesCount[Outcome.loss]
+      ? winRateAccuracies[Outcome.loss] / winRateAccuraciesCount[Outcome.loss]
       : 0,
   ];
 

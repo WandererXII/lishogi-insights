@@ -141,45 +141,46 @@ export type RoleIndex = number;
 
 export type Usi = string;
 
+// lowercased enums, so we are consistent - shogiops rules, translations, etc.
 export enum Variant {
-  Standard = 1,
-  Minishogi = 2,
-  Chushogi = 3,
-  Annanshogi = 4,
-  Kyotoshogi = 5,
-  Checkshogi = 6,
+  standard = 1,
+  minishogi = 2,
+  chushogi = 3,
+  annanshogi = 4,
+  kyotoshogi = 5,
+  checkshogi = 6,
 }
 
 export enum Outcome {
-  Win,
-  Draw,
-  Loss,
+  win,
+  draw,
+  loss,
 }
 
 export enum Status {
-  Checkmate = 30,
-  Resign = 31,
-  Stalemate = 32,
-  Timeout = 33,
-  Draw = 34,
-  Outoftime = 35,
-  Cheat = 36,
-  NoStart = 37,
-  UnknownFinish = 38,
-  TryRule = 39,
-  PerpetualCheck = 40,
-  Impasse27 = 41,
-  RoyalsLost = 42,
-  BareKing = 43,
-  Repetition = 44,
-  SpecialVariantEnd = 45,
+  checkmate = 30,
+  resign = 31,
+  stalemate = 32,
+  timeout = 33,
+  draw = 34,
+  outoftime = 35,
+  cheat = 36,
+  noStart = 37,
+  unknownFinish = 38,
+  tryRule = 39,
+  perpetualCheck = 40,
+  impasse27 = 41,
+  royalsLost = 42,
+  bareKing = 43,
+  repetition = 44,
+  specialVariantEnd = 45,
 }
 
 export enum Speed {
-  UltraBullet = 0,
-  Bullet = 1,
-  Blitz = 2,
-  Rapid = 5,
-  Classical = 3,
-  Correspondence = 4,
+  ultraBullet = 0,
+  bullet = 1,
+  blitz = 2,
+  rapid = 5,
+  classical = 3,
+  correspondence = 4,
 }

@@ -12,8 +12,8 @@ export function outcomes(games: Game[], flt: Filter): OutcomeResult {
     if (!filter(game, flt)) continue;
     cnt++;
     winrate[game.outcome] += 1;
-    if (game.outcome === Outcome.Win) winStatuses[game.status] = (winStatuses[game.status] || 0) + 1;
-    else if (game.outcome === Outcome.Loss) lossStatuses[game.status] = (lossStatuses[game.status] || 0) + 1;
+    if (game.outcome === Outcome.win) winStatuses[game.status] = (winStatuses[game.status] || 0) + 1;
+    else if (game.outcome === Outcome.loss) lossStatuses[game.status] = (lossStatuses[game.status] || 0) + 1;
   }
   return {
     nbOfGames: cnt,

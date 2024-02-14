@@ -24,7 +24,7 @@ import { GameDocument } from './database';
 
 export function processGameDocument(doc: GameDocument, by: string): Game {
   const color = doc.us.indexOf(by) === 0 ? 'sente' : 'gote';
-  const v = doc.v || Variant.Standard;
+  const v = doc.v || Variant.standard;
   const opponentUsername = color === 'sente' ? doc.us[1] : doc.us[0];
   const me = color === 'sente' ? doc.p0 : doc.p1;
   const opponent = color === 'sente' ? doc.p1 : doc.p0;
@@ -48,16 +48,16 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
           periodBytes ? new Uint8Array(periodBytes) : undefined,
           usis.length,
           usis.length % 2 === 1 ? color : opposite(color),
-          doc.s === Status.Outoftime,
+          doc.s === Status.outoftime,
         )
       : undefined;
 
   const speed = clockConfig
     ? speedByTotalTime(clockConfig.limit, clockConfig.inc, clockConfig.per, clockConfig.byo)
-    : Speed.Correspondence;
+    : Speed.correspondence;
 
   const status =
-    doc.s === Status.Timeout ? Status.Outoftime : doc.s === Status.Cheat ? Status.UnknownFinish : doc.s;
+    doc.s === Status.timeout ? Status.outoftime : doc.s === Status.cheat ? Status.unknownFinish : doc.s;
 
   const analysis: (number | undefined)[] | undefined = doc.analysisData
     ? decodeAnalysis(doc.analysisData, color === 'gote').map(e => evalToWin(e))
@@ -125,7 +125,7 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
       const captured = board.set(usi.to, old),
         secondCapture = defined(usi.midStep) ? board.take(usi.midStep) : undefined;
 
-      if (v === Variant.Standard && captured?.role === 'bishop' && i < 15 && !earlyTradedBishop) {
+      if (v === Variant.standard && captured?.role === 'bishop' && i < 15 && !earlyTradedBishop) {
         if (capturedBishopColor !== captured.color) earlyTradedBishop = true;
         else capturedBishopColor = captured.color;
       }
@@ -178,7 +178,7 @@ export function processGameDocument(doc: GameDocument, by: string): Game {
     id: doc._id,
     color: color,
     variant: v,
-    outcome: doc.wid === by ? Outcome.Win : doc.wid !== undefined ? Outcome.Loss : Outcome.Draw,
+    outcome: doc.wid === by ? Outcome.win : doc.wid !== undefined ? Outcome.loss : Outcome.draw,
     status: status,
     speed: speed,
     rated: !!doc.ra,
