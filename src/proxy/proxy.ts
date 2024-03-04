@@ -45,7 +45,7 @@ export class Proxy {
           const games = await this.getGames(username);
           cached = this.createResult(type, games, flt);
 
-          await this.cache.set(key, cached, 2);
+          await this.cache.set(key, cached, 1);
         }
       } finally {
         this.resultLock.release(key, cached!);
@@ -85,7 +85,7 @@ export class Proxy {
       try {
         if (!cached) {
           cached = await this.db.get(username);
-          await this.cache.set(username, cached, 4);
+          await this.cache.set(username, cached, 1);
         }
       } finally {
         this.gameLock.release(username, cached!);
@@ -106,7 +106,7 @@ export class Proxy {
 
     if (!cached) {
       cached = await this.db.latest();
-      if (cached) await this.cache.set(key, cached, 4);
+      if (cached) await this.cache.set(key, cached, 2);
     }
     return cached;
   }
