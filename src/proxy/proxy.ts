@@ -2,7 +2,7 @@ import { Database } from './database';
 import { Cache } from './cache';
 import conf from '../../config.json';
 import { lock } from './mutex';
-import { Filter, Game, Result, Type } from '../types';
+import { Filter, Game, Latest, Result, Type } from '../types';
 import { moves } from '../handlers/moves';
 import { opponents } from '../handlers/opponents';
 import { times } from '../handlers/times';
@@ -92,6 +92,22 @@ export class Proxy {
       }
     }
 
+    return cached;
+  }
+
+  async getLatest(): Promise<Latest | undefined> {
+    const key = '[SYS-latest]';
+    let cached: Latest | undefined = await this.cache.get<Latest>(key);
+
+    if (conf.logging) {
+      if (cached) console.debug('latest - cache hit');
+      else console.debug('latest - cache miss');
+    }
+
+    if (!cached) {
+      cached = await this.db.latest();
+      if (cached) await this.cache.set(key, cached, 4);
+    }
     return cached;
   }
 }

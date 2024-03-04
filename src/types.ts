@@ -60,6 +60,10 @@ export interface AnalysisResult extends Result {
   accuracyByRoleCount: PartialRecord<Role, number>;
 }
 
+export interface Latest {
+  latest: string;
+}
+
 export interface Filter {
   since: Millis;
   variant: Variant;

@@ -1,6 +1,6 @@
 import { MongoClient, MongoClientOptions, Db, Collection } from 'mongodb';
 import { processGameDocument } from './bdocHandler';
-import { Game } from '../types';
+import { Game, Latest } from '../types';
 import { getDateNDaysAgo } from '../util';
 
 export class Database {
@@ -91,6 +91,21 @@ export class Database {
     cursor.close();
 
     return ts;
+  };
+
+  latest = async (): Promise<Latest | undefined> => {
+    return this.collection
+      .findOne<GameDocument>(
+        {},
+        {
+          sort: { ua: -1 },
+          projection: { _id: 0, ua: 1 },
+        },
+      )
+      .then(doc => {
+        const l = doc?.ua?.toString();
+        return l ? { latest: l } : undefined;
+      });
   };
 }
 

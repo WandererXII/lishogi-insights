@@ -42,6 +42,17 @@ app.get('/:type(analysis|moves|opponents|outcomes|times|custom)', async (req: Re
   }
 });
 
+app.get('/latest', async (req: Request, res: Response) => {
+  try {
+    const latest = await proxy.getLatest();
+    if (!latest) res.status(404).send('No games present');
+    res.json(latest);
+  } catch (err) {
+    console.error('error', err);
+    res.status(500).end();
+  }
+});
+
 app.use(function (_req, res) {
   res.status(404).send('404: Nothing here...');
 });
